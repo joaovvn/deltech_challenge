@@ -4,6 +4,7 @@ import 'package:deltech_challenge/theme/colors.dart';
 import 'package:deltech_challenge/utils/snack_bar.dart';
 import 'package:deltech_challenge/widgets/custom_button.dart';
 import 'package:deltech_challenge/widgets/custom_text_field.dart';
+import 'package:deltech_challenge/widgets/loading_pokeball.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -69,14 +70,16 @@ class _RegisterViewState extends State<RegisterView> {
                   Expanded(
                     child: Row(
                       children: [
-                        Expanded(
-                          child: CustomButton(
-                            text: 'Cadastrar',
-                            function: controller.register,
-                            textColor: AppColors.mainColor,
-                            buttonColor: Colors.white,
-                          ),
-                        ),
+                        Expanded(child: Observer(builder: (_) {
+                          return controller.isLoading
+                              ? LoadingPokeball()
+                              : CustomButton(
+                                  text: 'Cadastrar',
+                                  function: controller.register,
+                                  textColor: AppColors.mainColor,
+                                  buttonColor: Colors.white,
+                                );
+                        })),
                       ],
                     ),
                   ),
