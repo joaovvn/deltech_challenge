@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1031170635381:android:862a520876b55009d06a3c",
+        "mobilesdk_app_id": "1:1031170635381:android:5db090267fed6139d06a3c",
         "android_client_info": {
-          "package_name": "com.joaovvn.pokedex"
+          "package_name": "com.example.deltech_challenge"
         }
       },
       "oauth_client": [],
