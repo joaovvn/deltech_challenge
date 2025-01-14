@@ -1,3 +1,4 @@
+import 'package:deltech_challenge/constants/values.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -31,7 +32,7 @@ class CustomTextField extends StatelessWidget {
             obscureText: isPassword,
             decoration: InputDecoration(
                 border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                    OutlineInputBorder(borderRadius: AppValues.borderRadius),
                 fillColor: Colors.white70,
                 filled: true),
           ),

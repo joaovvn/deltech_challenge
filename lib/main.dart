@@ -1,5 +1,5 @@
 import 'package:deltech_challenge/core/injector.dart';
-import 'package:deltech_challenge/sign_up/sign_up_view.dart';
+import 'package:deltech_challenge/views/login/login_view.dart';
 import 'package:deltech_challenge/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Kodchasan',
           useMaterial3: true,
         ),
-        home: const RegisterView(),
+        home: const LoginView(),
       ),
     );
   }
