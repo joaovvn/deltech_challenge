@@ -1,4 +1,5 @@
 import 'package:deltech_challenge/core/auth_error_handler.dart';
+import 'package:deltech_challenge/views/login/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -21,23 +22,26 @@ abstract class SignUpControllerBase with Store {
   bool isLoading = false;
 
   @observable
-  String? exceptionMessage;
+  String? message;
+
+  @observable
+  bool signUpCompleted = false;
 
   @action
-  Future<void> register() async {
+  Future<void> signUp() async {
     FocusManager.instance.primaryFocus?.unfocus();
     isLoading = true;
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         confirmPasswordController.text.isEmpty) {
-      exceptionMessage = 'Complete todos os campos!';
+      message = 'Complete todos os campos!';
       isLoading = false;
       return;
     }
 
     if (passwordController.text != confirmPasswordController.text) {
-      exceptionMessage = 'As senhas são diferentes!';
+      message = 'As senhas são diferentes!';
       isLoading = false;
       return;
     }
@@ -45,10 +49,20 @@ abstract class SignUpControllerBase with Store {
     try {
       UserCredential credential = await auth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      credential.user?.updateDisplayName(nameController.text);
+      await credential.user?.updateDisplayName(nameController.text);
+      await credential.user?.sendEmailVerification();
+      message = 'E-mail de verificação enviado!';
+      signUpCompleted = true;
+      return;
     } on FirebaseAuthException catch (exception) {
-      exceptionMessage = handleAuthError(exception);
+      message = handleAuthError(exception);
     }
     isLoading = false;
+  }
+
+  @action
+  void navigateToLoginPage(BuildContext context) {
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => LoginView()));
   }
 }

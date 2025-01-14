@@ -1,3 +1,4 @@
+import 'package:deltech_challenge/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -40,7 +41,7 @@ class _LoadingPokeballState extends State<LoadingPokeball>
         height: 50,
         width: 50,
         child: Image.asset(
-          'assets/images/pokeball.png',
+          AppImages.pokeball,
         ),
       ),
     );

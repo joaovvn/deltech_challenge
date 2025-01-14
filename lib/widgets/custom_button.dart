@@ -1,3 +1,4 @@
+import 'package:deltech_challenge/constants/values.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -20,7 +21,7 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-            color: buttonColor, borderRadius: BorderRadius.circular(20)),
+            color: buttonColor, borderRadius: AppValues.borderRadius),
         child: Center(
           child: Text(
             text,
