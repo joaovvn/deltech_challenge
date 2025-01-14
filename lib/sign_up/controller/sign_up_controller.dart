@@ -26,16 +26,19 @@ abstract class SignUpControllerBase with Store {
   @action
   Future<void> register() async {
     FocusManager.instance.primaryFocus?.unfocus();
+    isLoading = true;
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         confirmPasswordController.text.isEmpty) {
       exceptionMessage = 'Complete todos os campos!';
+      isLoading = false;
       return;
     }
 
     if (passwordController.text != confirmPasswordController.text) {
       exceptionMessage = 'As senhas são diferentes!';
+      isLoading = false;
       return;
     }
 
@@ -46,5 +49,6 @@ abstract class SignUpControllerBase with Store {
     } on FirebaseAuthException catch (exception) {
       exceptionMessage = handleAuthError(exception);
     }
+    isLoading = false;
   }
 }
