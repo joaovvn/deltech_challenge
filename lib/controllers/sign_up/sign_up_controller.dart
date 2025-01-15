@@ -35,13 +35,13 @@ abstract class SignUpControllerBase with Store {
         emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         confirmPasswordController.text.isEmpty) {
-      message = 'Complete todos os campos!';
+      message = 'Fill all the fields!';
       isLoading = false;
       return;
     }
 
     if (passwordController.text != confirmPasswordController.text) {
-      message = 'As senhas são diferentes!';
+      message = 'Passwords not matching!';
       isLoading = false;
       return;
     }
@@ -51,7 +51,7 @@ abstract class SignUpControllerBase with Store {
           email: emailController.text, password: passwordController.text);
       await credential.user?.updateDisplayName(nameController.text);
       await credential.user?.sendEmailVerification();
-      message = 'E-mail de verificação enviado!';
+      message = 'Verification e-mail sent!';
       signUpCompleted = true;
       return;
     } on FirebaseAuthException catch (exception) {
@@ -60,7 +60,6 @@ abstract class SignUpControllerBase with Store {
     isLoading = false;
   }
 
-  @action
   void navigateToLoginPage(BuildContext context) {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (_) => LoginView()));

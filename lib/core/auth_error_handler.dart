@@ -3,20 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 String handleAuthError(FirebaseAuthException error) {
   switch (error.code) {
     case 'email-already-in-use':
-      return 'Já existe uma conta com este endereço de e-mail.';
+      return 'An account with this email address already exists.';
     case 'invalid-email':
-      return 'O endereço de e-mail não é válido.';
+      return 'The email address is not valid.';
     case 'operation-not-allowed':
-      return 'Contas de e-mail/senha não estão habilitadas. Habilite no Firebase Console, na aba Auth.';
+      return 'Email/password accounts are not enabled. Enable them in the Firebase Console under the Auth tab.';
     case 'weak-password':
-      return 'A senha não é forte o suficiente.';
+      return 'The password is not strong enough.';
     case 'too-many-requests':
-      return 'Você enviou muitas requisições. Tente novamente mais tarde.';
+      return 'You have sent too many requests. Please try again later.';
     case 'user-token-expired':
-      return 'O token de autenticação expirou. Faça login novamente.';
+      return 'The authentication token has expired. Please log in again.';
     case 'network-request-failed':
-      return 'Falha na requisição de rede. Verifique sua conexão com a internet.';
+      return 'Network request failed. Check your internet connection.';
     default:
-      return 'Erro desconhecido: ${error.message}';
+      return 'Unknown error: ${error.message}';
   }
 }

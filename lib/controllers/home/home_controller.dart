@@ -25,8 +25,8 @@ abstract class HomeControllerBase with Store {
     pokemonService = PokemonService(dioClient);
     getPokemonList();
     scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-              scrollController.position.maxScrollExtent &&
+      if (scrollController.position.pixels >=
+              scrollController.position.maxScrollExtent - 200 &&
           !isLoading) {
         nextPagePokemonList();
       }
@@ -56,26 +56,32 @@ abstract class HomeControllerBase with Store {
   @action
   Future<void> getPokemon(String search) async {
     try {
+      isLoading = true;
+      pokemonList = [];
       if (search.isEmpty) {
-        return getPokemonList();
+        getPokemonList();
+        isLoading = false;
+        return;
       }
-      pokemonList.clear();
       PokemonListItem? pokemon = await pokemonService.searchPokemon(search);
+      if (pokemon == null) {
+        isLoading = false;
+        return;
+      }
       pokemonList = [pokemon];
     } catch (e) {
       rethrow;
     }
+    isLoading = false;
   }
 
   @action
   Future<void> nextPagePokemonList() async {
-    isLoading = true;
     try {
       pokemonList += await pokemonService.fetchNextPage();
     } catch (e) {
       rethrow;
     }
-    isLoading = false;
   }
 
   @action
@@ -90,7 +96,6 @@ abstract class HomeControllerBase with Store {
     isLoading = false;
   }
 
-  @action
   void navigateToLoginPage(BuildContext context) {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (_) => LoginView()));

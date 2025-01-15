@@ -2,7 +2,9 @@ import 'package:deltech_challenge/core/dio_client.dart';
 import 'package:deltech_challenge/models/pokemon_details.dart';
 import 'package:deltech_challenge/models/pokemon_list_item.dart';
 import 'package:deltech_challenge/services/pokemon_service.dart';
+import 'package:deltech_challenge/views/details/details_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
@@ -34,5 +36,12 @@ abstract class PokemonCardControllerBase with Store {
     } catch (e) {
       rethrow;
     }
+  }
+
+  void navigateToDetailsPage(BuildContext context, PokemonDetails details) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => DetailsView(
+              details: details,
+            )));
   }
 }

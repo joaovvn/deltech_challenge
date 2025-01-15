@@ -65,20 +65,6 @@ mixin _$SignUpController on SignUpControllerBase, Store {
     return _$signUpAsyncAction.run(() => super.signUp());
   }
 
-  late final _$SignUpControllerBaseActionController =
-      ActionController(name: 'SignUpControllerBase', context: context);
-
-  @override
-  void navigateToLoginPage(BuildContext context) {
-    final _$actionInfo = _$SignUpControllerBaseActionController.startAction(
-        name: 'SignUpControllerBase.navigateToLoginPage');
-    try {
-      return super.navigateToLoginPage(context);
-    } finally {
-      _$SignUpControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
