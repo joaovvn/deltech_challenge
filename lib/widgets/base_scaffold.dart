@@ -2,17 +2,24 @@ import 'package:deltech_challenge/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends StatelessWidget {
-  const BaseScaffold({super.key, required this.body});
+  const BaseScaffold(
+      {super.key,
+      required this.body,
+      this.appBar,
+      this.backgroundColor = AppColors.mainColor});
 
   final Widget body;
+  final PreferredSizeWidget? appBar;
+  final Color backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.mainColor,
+      backgroundColor: backgroundColor,
+      appBar: appBar,
       body: SafeArea(
-        minimum: EdgeInsets.all(24),
+        minimum: EdgeInsets.fromLTRB(0, 24, 0, 0),
         child: body,
       ),
     );

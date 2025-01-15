@@ -16,94 +16,97 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     SignUpController controller = SignUpController();
     return BaseScaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(),
-          HeroLogo(),
-          Expanded(
-            flex: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Crie sua conta',
-                  style: TextStyle(color: Colors.white, fontSize: 36),
-                ),
-                CustomTextField(
-                  title: 'Nome',
-                  controller: controller.nameController,
-                ),
-                CustomTextField(
-                  title: 'E-mail',
-                  controller: controller.emailController,
-                ),
-                CustomTextField(
-                  title: 'Senha',
-                  controller: controller.passwordController,
-                  isPassword: true,
-                ),
-                CustomTextField(
-                  title: 'Confirme a senha',
-                  controller: controller.confirmPasswordController,
-                  isPassword: true,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Row(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Spacer(),
+            HeroLogo(),
+            Expanded(
+              flex: 10,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Create your account',
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                  CustomTextField(
+                    title: 'Name',
+                    controller: controller.nameController,
+                  ),
+                  CustomTextField(
+                    title: 'E-mail',
+                    controller: controller.emailController,
+                  ),
+                  CustomTextField(
+                    title: 'Password',
+                    controller: controller.passwordController,
+                    isPassword: true,
+                  ),
+                  CustomTextField(
+                    title: 'Confirm the password',
+                    controller: controller.confirmPasswordController,
+                    isPassword: true,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      children: [
+                        Expanded(child: Observer(builder: (_) {
+                          return controller.isLoading
+                              ? LoadingPokeball()
+                              : CustomButton(
+                                  text: 'Sign Up',
+                                  function: controller.signUp,
+                                  textColor: AppColors.mainColor,
+                                  buttonColor: Colors.white,
+                                );
+                        })),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      'Already have an account?',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
+                  Row(
                     children: [
-                      Expanded(child: Observer(builder: (_) {
-                        return controller.isLoading
-                            ? LoadingPokeball()
-                            : CustomButton(
-                                text: 'Cadastrar',
-                                function: controller.signUp,
-                                textColor: AppColors.mainColor,
-                                buttonColor: Colors.white,
-                              );
-                      })),
+                      Expanded(
+                          child: CustomButton(
+                        text: 'Login',
+                        function: () => controller.navigateToLoginPage(context),
+                      )),
                     ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    'Já possui uma conta?',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CustomButton(
-                      text: 'Login',
-                      function: () => controller.navigateToLoginPage(context),
-                    )),
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Spacer(),
-          Observer(
-            builder: (_) {
-              if (controller.signUpCompleted) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  controller.navigateToLoginPage(context);
-                });
-              }
-              if (controller.message != null) {
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  showSnackBar(context, controller.message!);
-                  controller.message = null;
-                });
-              }
-              return SizedBox.shrink();
-            },
-          ),
-        ],
+            Spacer(),
+            Observer(
+              builder: (_) {
+                if (controller.signUpCompleted) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    controller.navigateToLoginPage(context);
+                  });
+                }
+                if (controller.message != null) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    showSnackBar(context, controller.message!);
+                    controller.message = null;
+                  });
+                }
+                return SizedBox.shrink();
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

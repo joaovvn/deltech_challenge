@@ -105,17 +105,6 @@ mixin _$HomeController on HomeControllerBase, Store {
   }
 
   @override
-  void navigateToLoginPage(BuildContext context) {
-    final _$actionInfo = _$HomeControllerBaseActionController.startAction(
-        name: 'HomeControllerBase.navigateToLoginPage');
-    try {
-      return super.navigateToLoginPage(context);
-    } finally {
-      _$HomeControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 isLoading: ${isLoading},

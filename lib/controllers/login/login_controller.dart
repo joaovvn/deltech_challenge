@@ -30,7 +30,7 @@ abstract class LoginControllerBase with Store {
     FocusManager.instance.primaryFocus?.unfocus();
     isLoading = true;
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      message = 'Complete todos os campos!';
+      message = 'Fill all the fields!';
       isLoading = false;
       return;
     }
@@ -39,7 +39,7 @@ abstract class LoginControllerBase with Store {
       UserCredential credential = await auth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
       if (!credential.user!.emailVerified) {
-        message = 'Verifique o e-mail para fazer o login!';
+        message = 'Verify your e-mail to login!';
         await auth.signOut();
       }
       if (auth.currentUser != null) {
@@ -57,7 +57,6 @@ abstract class LoginControllerBase with Store {
         .pushReplacement(MaterialPageRoute(builder: (_) => SignUpView()));
   }
 
-  @action
   void navigateToHomePage(BuildContext context) {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (_) => HomeView()));
