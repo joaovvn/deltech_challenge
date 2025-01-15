@@ -35,12 +35,10 @@ class SignUpView extends StatelessWidget {
                 CustomTextField(
                   title: 'Nome',
                   controller: controller.nameController,
-                  isPassword: false,
                 ),
                 CustomTextField(
                   title: 'E-mail',
                   controller: controller.emailController,
-                  isPassword: false,
                 ),
                 CustomTextField(
                   title: 'Senha',

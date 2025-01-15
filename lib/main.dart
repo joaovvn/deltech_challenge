@@ -17,6 +17,9 @@ class MyApp extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: MaterialApp(
+        builder: (context, child) {
+          return SafeArea(child: child!);
+        },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mainColor),
           fontFamily: 'Kodchasan',

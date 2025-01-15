@@ -1,4 +1,5 @@
 import 'package:deltech_challenge/core/auth_error_handler.dart';
+import 'package:deltech_challenge/views/home/home_view.dart';
 import 'package:deltech_challenge/views/sign_up/sign_up_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ abstract class LoginControllerBase with Store {
   String? message;
 
   @observable
-  UserCredential? credential;
+  bool loggedIn = false;
 
   @action
   Future<void> login() async {
@@ -35,11 +36,14 @@ abstract class LoginControllerBase with Store {
     }
 
     try {
-      credential = await auth.signInWithEmailAndPassword(
+      UserCredential credential = await auth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      if (!credential!.user!.emailVerified) {
+      if (!credential.user!.emailVerified) {
         message = 'Verifique o e-mail para fazer o login!';
-        auth.signOut();
+        await auth.signOut();
+      }
+      if (auth.currentUser != null) {
+        loggedIn = true;
       }
     } on FirebaseAuthException catch (exception) {
       message = handleAuthError(exception);
@@ -51,5 +55,11 @@ abstract class LoginControllerBase with Store {
   void navigateToSignUpPage(BuildContext context) {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (_) => SignUpView()));
+  }
+
+  @action
+  void navigateToHomePage(BuildContext context) {
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (_) => HomeView()));
   }
 }

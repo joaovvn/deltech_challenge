@@ -33,7 +33,6 @@ class LoginView extends StatelessWidget {
               CustomTextField(
                 title: 'E-mail',
                 controller: controller.emailController,
-                isPassword: false,
               ),
               CustomTextField(
                 title: 'Senha',
@@ -79,6 +78,11 @@ class LoginView extends StatelessWidget {
         Spacer(),
         Observer(
           builder: (_) {
+            if (controller.loggedIn) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                controller.navigateToHomePage(context);
+              });
+            }
             if (controller.message != null) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 showSnackBar(context, controller.message!);
