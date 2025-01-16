@@ -27,6 +27,12 @@ abstract class SignUpControllerBase with Store {
   @observable
   bool signUpCompleted = false;
 
+  @observable
+  bool passwordObscure = true;
+
+  @observable
+  bool confirmPasswordObscure = true;
+
   @action
   Future<void> signUp() async {
     FocusManager.instance.primaryFocus?.unfocus();
@@ -58,6 +64,16 @@ abstract class SignUpControllerBase with Store {
       message = handleAuthError(exception);
     }
     isLoading = false;
+  }
+
+  @action
+  void switchPasswordVisibility() {
+    passwordObscure = !passwordObscure;
+  }
+
+  @action
+  void switchConfirmPasswordVisibility() {
+    confirmPasswordObscure = !confirmPasswordObscure;
   }
 
   void navigateToLoginPage(BuildContext context) {

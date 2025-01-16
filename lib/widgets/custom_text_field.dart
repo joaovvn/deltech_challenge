@@ -9,14 +9,18 @@ class CustomTextField extends StatelessWidget {
       required this.controller,
       this.prefixIcon,
       this.isPassword = false,
+      this.isObscure = true,
+      this.switchVisibility,
       this.onSubmitted});
 
   final String title;
   final TextEditingController controller;
   final bool isPassword;
+  final bool isObscure;
   final String? hint;
   final Icon? prefixIcon;
   final Function(String)? onSubmitted;
+  final Function()? switchVisibility;
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +43,18 @@ class CustomTextField extends StatelessWidget {
           height: 50,
           child: TextField(
             controller: controller,
-            obscureText: isPassword,
+            obscureText: isObscure,
             onSubmitted: onSubmitted,
             decoration: InputDecoration(
                 prefixIcon: prefixIcon,
+                suffixIcon: isPassword
+                    ? GestureDetector(
+                        onTap: switchVisibility,
+                        child: isObscure
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility),
+                      )
+                    : null,
                 border:
                     OutlineInputBorder(borderRadius: AppValues.borderRadius),
                 fillColor: Colors.white70,

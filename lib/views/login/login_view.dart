@@ -36,11 +36,16 @@ class LoginView extends StatelessWidget {
                   title: 'E-mail',
                   controller: controller.emailController,
                 ),
-                CustomTextField(
-                  title: 'Password',
-                  controller: controller.passwordController,
-                  isPassword: true,
-                ),
+                Observer(builder: (context) {
+                  return CustomTextField(
+                    title: 'Password',
+                    controller: controller.passwordController,
+                    isPassword: true,
+                    isObscure: controller.passwordObscure,
+                    switchVisibility: () =>
+                        controller.switchPasswordVisibility(),
+                  );
+                }),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Row(

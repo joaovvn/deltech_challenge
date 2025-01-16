@@ -25,6 +25,9 @@ abstract class LoginControllerBase with Store {
   @observable
   bool loggedIn = false;
 
+  @observable
+  bool passwordObscure = true;
+
   @action
   Future<void> login() async {
     FocusManager.instance.primaryFocus?.unfocus();
@@ -55,6 +58,11 @@ abstract class LoginControllerBase with Store {
   void navigateToSignUpPage(BuildContext context) {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (_) => SignUpView()));
+  }
+
+  @action
+  void switchPasswordVisibility() {
+    passwordObscure = !passwordObscure;
   }
 
   void navigateToHomePage(BuildContext context) {
