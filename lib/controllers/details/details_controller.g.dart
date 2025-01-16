@@ -46,6 +46,14 @@ mixin _$DetailsController on DetailsControllerBase, Store {
     });
   }
 
+  late final _$initAsyncAction =
+      AsyncAction('DetailsControllerBase.init', context: context);
+
+  @override
+  Future init(PokemonDetails details) {
+    return _$initAsyncAction.run(() => super.init(details));
+  }
+
   late final _$getCharacteristicsAsyncAction =
       AsyncAction('DetailsControllerBase.getCharacteristics', context: context);
 
@@ -55,18 +63,13 @@ mixin _$DetailsController on DetailsControllerBase, Store {
         .run(() => super.getCharacteristics());
   }
 
-  late final _$DetailsControllerBaseActionController =
-      ActionController(name: 'DetailsControllerBase', context: context);
+  late final _$getTypeDetailsAsyncAction =
+      AsyncAction('DetailsControllerBase.getTypeDetails', context: context);
 
   @override
-  dynamic init(PokemonDetails details) {
-    final _$actionInfo = _$DetailsControllerBaseActionController.startAction(
-        name: 'DetailsControllerBase.init');
-    try {
-      return super.init(details);
-    } finally {
-      _$DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> getTypeDetails(PokemonDetails pokemonDetails) {
+    return _$getTypeDetailsAsyncAction
+        .run(() => super.getTypeDetails(pokemonDetails));
   }
 
   @override

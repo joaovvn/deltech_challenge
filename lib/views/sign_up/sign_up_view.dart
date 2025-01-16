@@ -9,12 +9,18 @@ import 'package:deltech_challenge/widgets/loading_pokeball.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-class SignUpView extends StatelessWidget {
+class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
 
   @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
+  SignUpController controller = SignUpController();
+
+  @override
   Widget build(BuildContext context) {
-    SignUpController controller = SignUpController();
     return BaseScaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -42,16 +48,27 @@ class SignUpView extends StatelessWidget {
                     title: 'E-mail',
                     controller: controller.emailController,
                   ),
-                  CustomTextField(
-                    title: 'Password',
-                    controller: controller.passwordController,
-                    isPassword: true,
-                  ),
-                  CustomTextField(
-                    title: 'Confirm the password',
-                    controller: controller.confirmPasswordController,
-                    isPassword: true,
-                  ),
+                  Observer(builder: (context) {
+                    debugPrint(controller.passwordObscure.toString());
+                    return CustomTextField(
+                      title: 'Password',
+                      controller: controller.passwordController,
+                      isPassword: true,
+                      isObscure: controller.passwordObscure,
+                      switchVisibility: () =>
+                          controller.switchPasswordVisibility(),
+                    );
+                  }),
+                  Observer(builder: (context) {
+                    return CustomTextField(
+                      title: 'Confirm the password',
+                      controller: controller.confirmPasswordController,
+                      isPassword: true,
+                      isObscure: controller.confirmPasswordObscure,
+                      switchVisibility: () =>
+                          controller.switchConfirmPasswordVisibility(),
+                    );
+                  }),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Row(

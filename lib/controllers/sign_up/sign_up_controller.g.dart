@@ -57,6 +57,39 @@ mixin _$SignUpController on SignUpControllerBase, Store {
     });
   }
 
+  late final _$passwordObscureAtom =
+      Atom(name: 'SignUpControllerBase.passwordObscure', context: context);
+
+  @override
+  bool get passwordObscure {
+    _$passwordObscureAtom.reportRead();
+    return super.passwordObscure;
+  }
+
+  @override
+  set passwordObscure(bool value) {
+    _$passwordObscureAtom.reportWrite(value, super.passwordObscure, () {
+      super.passwordObscure = value;
+    });
+  }
+
+  late final _$confirmPasswordObscureAtom = Atom(
+      name: 'SignUpControllerBase.confirmPasswordObscure', context: context);
+
+  @override
+  bool get confirmPasswordObscure {
+    _$confirmPasswordObscureAtom.reportRead();
+    return super.confirmPasswordObscure;
+  }
+
+  @override
+  set confirmPasswordObscure(bool value) {
+    _$confirmPasswordObscureAtom
+        .reportWrite(value, super.confirmPasswordObscure, () {
+      super.confirmPasswordObscure = value;
+    });
+  }
+
   late final _$signUpAsyncAction =
       AsyncAction('SignUpControllerBase.signUp', context: context);
 
@@ -65,12 +98,39 @@ mixin _$SignUpController on SignUpControllerBase, Store {
     return _$signUpAsyncAction.run(() => super.signUp());
   }
 
+  late final _$SignUpControllerBaseActionController =
+      ActionController(name: 'SignUpControllerBase', context: context);
+
+  @override
+  void switchPasswordVisibility() {
+    final _$actionInfo = _$SignUpControllerBaseActionController.startAction(
+        name: 'SignUpControllerBase.switchPasswordVisibility');
+    try {
+      return super.switchPasswordVisibility();
+    } finally {
+      _$SignUpControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void switchConfirmPasswordVisibility() {
+    final _$actionInfo = _$SignUpControllerBaseActionController.startAction(
+        name: 'SignUpControllerBase.switchConfirmPasswordVisibility');
+    try {
+      return super.switchConfirmPasswordVisibility();
+    } finally {
+      _$SignUpControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 isLoading: ${isLoading},
 message: ${message},
-signUpCompleted: ${signUpCompleted}
+signUpCompleted: ${signUpCompleted},
+passwordObscure: ${passwordObscure},
+confirmPasswordObscure: ${confirmPasswordObscure}
     ''';
   }
 }
