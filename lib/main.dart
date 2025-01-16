@@ -1,6 +1,6 @@
 import 'package:deltech_challenge/core/injector.dart';
-import 'package:deltech_challenge/views/login/login_view.dart';
 import 'package:deltech_challenge/theme/colors.dart';
+import 'package:deltech_challenge/views/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -17,15 +17,12 @@ class MyApp extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: MaterialApp(
-        builder: (context, child) {
-          return SafeArea(child: child!);
-        },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.mainColor),
           fontFamily: 'Kodchasan',
           useMaterial3: true,
         ),
-        home: const LoginView(),
+        home: const SplashView(),
       ),
     );
   }

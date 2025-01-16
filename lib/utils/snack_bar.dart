@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 
 void showSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    backgroundColor: AppColors.mainColor,
+    backgroundColor: Colors.white,
     duration: Durations.extralong4,
     content: Text(
       text,
       textAlign: TextAlign.center,
       style: const TextStyle(
-          color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          color: AppColors.mainColor,
+          fontSize: 15,
+          fontWeight: FontWeight.bold),
     ),
   ));
 }

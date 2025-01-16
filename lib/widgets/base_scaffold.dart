@@ -19,7 +19,7 @@ class BaseScaffold extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: appBar,
       body: SafeArea(
-        minimum: EdgeInsets.fromLTRB(0, 24, 0, 0),
+        minimum: EdgeInsets.fromLTRB(0, 50, 0, 0),
         child: body,
       ),
     );
