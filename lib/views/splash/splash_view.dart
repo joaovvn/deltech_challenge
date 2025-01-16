@@ -1,7 +1,7 @@
-import 'package:deltech_challenge/constants/images.dart';
 import 'package:deltech_challenge/controllers/splash/splash_controller.dart';
 import 'package:deltech_challenge/widgets/base_scaffold.dart';
-import 'package:deltech_challenge/widgets/hero_logo.dart';
+import 'package:deltech_challenge/widgets/disappearing_pokeball.dart';
+import 'package:deltech_challenge/widgets/pulsating_pokeball.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -15,21 +15,11 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView>
     with SingleTickerProviderStateMixin {
   SplashController controller = SplashController();
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
     controller.verifyAuthentication();
-    _controller = AnimationController(
-      duration: Duration(milliseconds: 950),
-      vsync: this,
-      upperBound: 0.85,
-      lowerBound: 0.5,
-    )..repeat(reverse: true);
-
-    _scaleAnimation = Tween<double>(begin: 0.5, end: 0.85).animate(_controller);
   }
 
   @override
@@ -45,38 +35,8 @@ class _SplashViewState extends State<SplashView>
             });
           }
           return controller.loaded
-              ? Column(
-                  children: [
-                    TweenAnimationBuilder(
-                      tween: Tween<double>(begin: 0.8, end: 0),
-                      duration: Duration(seconds: 1),
-                      curve: Curves.easeInOut,
-                      builder: (context, double scale, child) {
-                        return Transform.scale(
-                          scale: scale,
-                          child: child,
-                        );
-                      },
-                      child: Image.asset(AppImages.pokeball),
-                    ),
-                    SizedBox(height: 100, child: HeroLogo())
-                  ],
-                )
-              : Column(
-                  children: [
-                    AnimatedBuilder(
-                      animation: _scaleAnimation,
-                      builder: (context, child) {
-                        return Transform.scale(
-                          scale: _scaleAnimation.value,
-                          child: child,
-                        );
-                      },
-                      child: Image.asset(AppImages.pokeball),
-                    ),
-                    SizedBox(height: 100, child: HeroLogo())
-                  ],
-                );
+              ? DisappearingPokeball()
+              : PulsatingPokeball();
         }),
       ),
     );

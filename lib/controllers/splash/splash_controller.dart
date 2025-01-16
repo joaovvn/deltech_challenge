@@ -23,7 +23,7 @@ abstract class SplashControllerBase with Store {
     try {
       await Future.delayed(Duration(seconds: 3));
       loaded = true;
-      await Future.delayed(Duration(milliseconds: 900));
+      await Future.delayed(Duration(milliseconds: 950));
       auth.currentUser != null ? authenticated = true : authenticated = false;
     } catch (e) {
       rethrow;
