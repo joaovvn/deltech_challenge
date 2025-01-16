@@ -5,8 +5,11 @@ import 'package:deltech_challenge/extensions/string_extensions.dart';
 import 'package:deltech_challenge/models/pokemon_details.dart';
 import 'package:deltech_challenge/utils/type_colors.dart';
 import 'package:deltech_challenge/widgets/base_scaffold.dart';
+import 'package:deltech_challenge/widgets/details_image.dart';
+import 'package:deltech_challenge/widgets/details_info.dart';
+import 'package:deltech_challenge/widgets/details_stats.dart';
+import 'package:deltech_challenge/widgets/details_weaknesses.dart';
 import 'package:deltech_challenge/widgets/loading_pokeball.dart';
-import 'package:deltech_challenge/widgets/stats_widget.dart';
 import 'package:deltech_challenge/widgets/type_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -48,19 +51,7 @@ class _DetailsViewState extends State<DetailsView> {
           Positioned.fill(
               child: Align(
             alignment: Alignment(0.8, -1),
-            child: Image.asset(
-              AppImages.getGifPath(controller.pokemonDetails.id),
-              errorBuilder: (context, error, stackTrace) => Image.network(
-                controller.pokemonDetails.images.animated,
-                fit: BoxFit.fitHeight,
-                height: 160,
-                errorBuilder: (context, error, stackTrace) => Image.network(
-                  controller.pokemonDetails.images.frontDefault,
-                  fit: BoxFit.fitHeight,
-                  height: 160,
-                ),
-              ),
-            ),
+            child: DetailsImage(controller: controller),
           )),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,176 +120,15 @@ class _DetailsViewState extends State<DetailsView> {
                           ? Center(child: LoadingPokeball())
                           : Column(
                               children: [
-                                Expanded(
-                                  child: Column(
-                                    children: [
-                                      Text('Info',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          )),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Height",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black54),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                widget.details.height
-                                                    .decimeterToMeter,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Weight",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black54),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                controller.pokemonDetails.weight
-                                                    .hectogramToKilogram,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Characteristics",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black54),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                controller.characteristics,
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "Abilities",
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black54),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: FittedBox(
-                                                fit: BoxFit.scaleDown,
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                  controller
-                                                      .pokemonDetails.abilities
-                                                      .map((ability) => ability
-                                                          .name.capitalizeFirst)
-                                                      .join(', '),
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                DetailsInfo(controller: controller),
                                 Divider(
                                   color: Colors.black87,
                                 ),
-                                Column(
-                                  children: [
-                                    Text("Weaknesses",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    GridView(
-                                      shrinkWrap: true,
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 4,
-                                              childAspectRatio: 3.0),
-                                      children: controller.weaknessesList
-                                          .map((weakness) {
-                                        return TypeCard(type: weakness);
-                                      }).toList(),
-                                    )
-                                  ],
-                                ),
+                                DetailsWeaknesses(controller: controller),
                                 Divider(
                                   color: Colors.black87,
                                 ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Column(
-                                    children: [
-                                      Text('Stats',
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          )),
-                                      Expanded(
-                                        child: Column(
-                                          children: controller
-                                              .pokemonDetails.stats
-                                              .map((pokemonStats) {
-                                            return StatsWidget(
-                                              pokemonStats: pokemonStats,
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                DetailsStats(controller: controller)
                               ],
                             );
                     }),
