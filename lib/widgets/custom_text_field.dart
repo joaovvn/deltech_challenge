@@ -9,7 +9,7 @@ class CustomTextField extends StatelessWidget {
       required this.controller,
       this.prefixIcon,
       this.isPassword = false,
-      this.isObscure = true,
+      this.isObscure = false,
       this.switchVisibility,
       this.onSubmitted});
 

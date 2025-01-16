@@ -41,6 +41,7 @@ class LoginView extends StatelessWidget {
                     title: 'Password',
                     controller: controller.passwordController,
                     isPassword: true,
+                    onSubmitted: (_) => controller.login(),
                     isObscure: controller.passwordObscure,
                     switchVisibility: () =>
                         controller.switchPasswordVisibility(),

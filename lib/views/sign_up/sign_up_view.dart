@@ -65,6 +65,7 @@ class _SignUpViewState extends State<SignUpView> {
                       controller: controller.confirmPasswordController,
                       isPassword: true,
                       isObscure: controller.confirmPasswordObscure,
+                      onSubmitted: (_) => controller.signUp(),
                       switchVisibility: () =>
                           controller.switchConfirmPasswordVisibility(),
                     );
