@@ -1,9 +1,86 @@
-# deltech_challenge
+# Pokedex
 
-Deltech Challenge based on PokéAPI
+Flutter-based mobile application for searching and viewing details of all the Pokémons provided by PokeAPI.
 
-## Info
+## Functionalities
 
-**Mobile:** [Flutter](https://docs.flutter.dev/).
+- ### Authentication
+    Signup and login through Firebase Authentication.
 
-**API:** [PokéAPI](https://pokeapi.co/).
+- ### Find your Pokémon
+    Search for or look through the list of Pokémons.
+
+- ### Find details about each Pokémon
+    You can see details about all the Pokémons.
+
+
+
+## Technologies
+
+- **Mobile:** [Flutter](https://docs.flutter.dev/).
+
+- **API:** [PokéAPI](https://pokeapi.co/).
+
+- **Firebase:** [Firebase](https://firebase.google.com).
+
+## External Libraries
+
+- ***State Management:*** [MobX](https://pub.dev/packages/mobx).
+
+- ***Dependency Injection:*** [GetIt](https://pub.dev/packages/get_it).
+
+- ***HTTP Networking:*** [Dio](https://pub.dev/packages/dio).
+
+## Running
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/user/project.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   dart pub get
+   ```
+
+3. Generate *.g.dart files
+   ```bash
+   dart run build_runner build
+    ```
+
+4. Run
+   ```bash
+   flutter run
+    ```
+
+## Project Structure
+
+- ### lib/core/constants
+    App Constants
+
+- ### lib/controllers
+    Controllers for the screens
+
+- ### lib/core
+    Essencials for app funcionalities
+
+- ### lib/extensions
+    Strings and number manipulation extensions
+
+- ### lib/models
+    API data models
+
+- ### lib/services
+    API fetching services
+
+- ### lib/theme
+    Contains the app theme
+
+- ### lib/utils
+    Utility functions
+
+- ### lib/views
+    Contains the UI
+
+- ### lib/widgets
+    Contains reusable UI widgets
