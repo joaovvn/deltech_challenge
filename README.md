@@ -5,15 +5,15 @@ Flutter-based mobile application for searching and viewing details of all the Po
 ## Functionalities
 
 - ### Authentication
-    Signup and login through Firebase Authentication.
+
+  Signup and login through Firebase Authentication.
 
 - ### Find your Pokémon
-    Search for or look through the list of Pokémons.
+
+  Search for or look through the list of Pokémons.
 
 - ### Find details about each Pokémon
-    You can see details about all the Pokémons.
-
-
+  You can see details about all the Pokémons.
 
 ## Technologies
 
@@ -25,62 +25,79 @@ Flutter-based mobile application for searching and viewing details of all the Po
 
 ## External Libraries
 
-- ***State Management:*** [MobX](https://pub.dev/packages/mobx).
+- **_State Management:_** [MobX](https://pub.dev/packages/mobx).
 
-- ***Dependency Injection:*** [GetIt](https://pub.dev/packages/get_it).
+- **_Dependency Injection:_** [GetIt](https://pub.dev/packages/get_it).
 
-- ***HTTP Networking:*** [Dio](https://pub.dev/packages/dio).
+- **_HTTP Networking:_** [Dio](https://pub.dev/packages/dio).
 
 ## Running
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/user/project.git
    ```
 
 2. Install dependencies:
+
    ```bash
    dart pub get
    ```
 
-3. Generate *.g.dart files
+3. Generate \*.g.dart files
+
    ```bash
    dart run build_runner build
-    ```
+   ```
 
-4. Run
+4. Choose your emulator
+
+   Your emulator **must** use Android API 23 or above, preferably above 31.
+
+5. Run
+
    ```bash
    flutter run
-    ```
+   ```
 
 ## Project Structure
 
 - ### lib/core/constants
-    App Constants
+
+  App Constants
 
 - ### lib/controllers
-    Controllers for the screens
+
+  Controllers for the screens
 
 - ### lib/core
-    Essencials for app funcionalities
+
+  Essencials for app funcionalities
 
 - ### lib/extensions
-    Strings and number manipulation extensions
+
+  Strings and number manipulation extensions
 
 - ### lib/models
-    API data models
+
+  API data models
 
 - ### lib/services
-    API fetching services
+
+  API fetching services
 
 - ### lib/theme
-    Contains the app theme
+
+  Contains the app theme
 
 - ### lib/utils
-    Utility functions
+
+  Utility functions
 
 - ### lib/views
-    Contains the UI
+
+  Contains the UI
 
 - ### lib/widgets
-    Contains reusable UI widgets
+  Contains reusable UI widgets
