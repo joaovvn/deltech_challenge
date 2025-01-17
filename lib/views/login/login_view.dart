@@ -23,7 +23,7 @@ class LoginView extends StatelessWidget {
           Spacer(),
           HeroLogo(),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -83,7 +83,9 @@ class LoginView extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          Spacer(
+            flex: 2,
+          ),
           Observer(
             builder: (_) {
               if (controller.loggedIn) {
