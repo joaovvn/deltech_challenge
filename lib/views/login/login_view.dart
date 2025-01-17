@@ -19,19 +19,20 @@ class LoginView extends StatelessWidget {
         body: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Spacer(),
           HeroLogo(),
-          Expanded(
-            flex: 3,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
                   'Welcome to your Pokedex!',
                   style: TextStyle(color: Colors.white, fontSize: 26),
                 ),
-                Spacer(),
+              ),
+              Column(children: [
                 CustomTextField(
                   title: 'E-mail',
                   controller: controller.emailController,
@@ -80,11 +81,8 @@ class LoginView extends StatelessWidget {
                     )),
                   ],
                 ),
-              ],
-            ),
-          ),
-          Spacer(
-            flex: 2,
+              ])
+            ],
           ),
           Observer(
             builder: (_) {
