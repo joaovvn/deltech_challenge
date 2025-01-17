@@ -29,99 +29,101 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Expanded(child: HeroLogo()),
-        Expanded(
-          child: Row(
-            children: [
-              CircleAvatar(
-                child: Text(controller.auth.currentUser!.displayName![0],
-                    style: TextStyle(
-                        color: AppColors.mainColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20)),
-              ),
-              Spacer(),
-              Expanded(
-                flex: 15,
-                child: Text(
-                  'Hello, ${controller.auth.currentUser!.displayName!}!',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      overflow: TextOverflow.ellipsis),
-                ),
-              ),
-              IconButton(
-                  onPressed: () => controller.logout(),
-                  icon: Icon(
-                    Icons.logout,
-                    color: Colors.white,
-                  ))
-            ],
-          ),
-        ),
-        Expanded(
-          child: CustomTextField(
-            controller: controller.searchController,
-            onSubmitted: (value) => controller.getPokemon(value),
-            isPassword: false,
-            prefixIcon: Icon(Icons.search),
-            hint: 'Search for a Pokémon name or ID',
-          ),
-        ),
-        Expanded(
-          flex: 10,
-          child: Observer(builder: (context) {
-            if (controller.isLoading) {
-              return Center(child: LoadingPokeball());
-            }
-            if (controller.pokemonList.isEmpty) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+            Expanded(child: HeroLogo()),
+            Expanded(
+              child: Row(
                 children: [
-                  Image.asset(
-                    AppImages.psyduck,
-                    height: 100,
+                  CircleAvatar(
+                    child: Text(controller.auth.currentUser!.displayName![0],
+                        style: TextStyle(
+                            color: AppColors.mainColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20)),
                   ),
-                  Text(
-                    'Not found!',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
-                  )
-                ],
-              );
-            }
-            return ListView.builder(
-                controller: controller.scrollController,
-                itemCount: controller.pokemonList.length,
-                itemBuilder: (context, index) {
-                  PokemonListItem pokemon = controller.pokemonList[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: PokemonCard(
-                      pokemon: pokemon,
+                  Spacer(),
+                  Expanded(
+                    flex: 15,
+                    child: Text(
+                      'Hello, ${controller.auth.currentUser!.displayName!}!',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          overflow: TextOverflow.ellipsis),
                     ),
+                  ),
+                  IconButton(
+                      onPressed: () => controller.logout(),
+                      icon: Icon(
+                        Icons.logout,
+                        color: Colors.white,
+                      ))
+                ],
+              ),
+            ),
+            Expanded(
+              child: CustomTextField(
+                controller: controller.searchController,
+                onSubmitted: (value) => controller.getPokemon(value),
+                isPassword: false,
+                prefixIcon: Icon(Icons.search),
+                hint: 'Search for a Pokémon name or ID',
+              ),
+            ),
+            Expanded(
+              flex: 10,
+              child: Observer(builder: (context) {
+                if (controller.isLoading) {
+                  return Center(child: LoadingPokeball());
+                }
+                if (controller.pokemonList.isEmpty) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        AppImages.psyduck,
+                        height: 100,
+                      ),
+                      Text(
+                        'Not found!',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600),
+                      )
+                    ],
                   );
-                });
-          }),
-        ),
-        Observer(
-          builder: (_) {
-            if (controller.loggedOut) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                controller.navigateToLoginPage(context);
-              });
-            }
-            return SizedBox.shrink();
-          },
-        ),
-      ]),
-    ));
+                }
+                return ListView.builder(
+                    controller: controller.scrollController,
+                    itemCount: controller.pokemonList.length,
+                    itemBuilder: (context, index) {
+                      PokemonListItem pokemon = controller.pokemonList[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: PokemonCard(
+                          pokemon: pokemon,
+                        ),
+                      );
+                    });
+              }),
+            ),
+            Observer(
+              builder: (_) {
+                if (controller.loggedOut) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    controller.navigateToLoginPage(context);
+                  });
+                }
+                return SizedBox.shrink();
+              },
+            ),
+          ]),
+        ));
   }
 }
